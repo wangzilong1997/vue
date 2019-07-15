@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue中的列表渲染</title>
+  </head>
+  <body>
+    <div id="app">
+      <div v-for="(item,index) of list" v-bind:key="index">
+        {{item}}----{{index}}
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el:"#app",
+        data:{
+          list : [
+              "hello",
+              "nice",
+              "to",
+              "meet",
+              "you"
+        ]
+      }
+    })
+    //只能用遍历方法改变数据 mvvm的实现 引用改变
+  </script>
+</html>
