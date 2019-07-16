@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>非父子组件传值(bus/总线/发布订阅/观察者)</title>
+  </head>
+  <body>
+    <div id="app">
+      <child content="wang"></child>
+      <child content="shuaishuai"></child>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <script type="text/javascript">
+    Vue.prototype.bus = new Vue()
+    Vue.component('child',{
+      data:function(){
+        return {
+          selfContent:this.content
+        }
+      },
+      props:{
+        content:String
+      },
+      template:'<div v-on:click="handleClick">{{selfContent}}</div>'
+      ,
+      methods:{
+        handleClick:function(){
+          console.log('handleClick')
+          this.bus.$emit('change',this.selfContent)
+        }
+      },
+      mounted:function(){
+        console.log('mounted')
+        var this_ = this
+        this.bus.$on('change',function(msg){
+          this_.selfContent = msg
+        })
+      }
+    })
+    var vm = new Vue({
+      el:'#app',
+    })
+  </script>
+</html>

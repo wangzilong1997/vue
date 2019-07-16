@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>组件使用中的细节点</title>
+  </head>
+  <body>
+    <div id="app">
+      <!--<div ref="hello" v-on:click="handleClick">
+        hello world!
+      </div>-->
+      <counter ref="one" v-on:change="handleChange"></counter>
+      <counter ref="two" v-on:change="handleChange"></counter>
+      <div>{{total}}</div>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script type="text/javascript">
+    Vue.component("counter",{
+      template:'<div v-on:click="handleClick">{{number}}</div>',
+      data:function(){
+        return {
+          number:0
+        }
+      },
+      methods:{
+        handleClick:function(){
+          this.number ++
+          this.$emit('change')
+        }
+      }
+    })
+    var vm = new Vue({
+      el:"#app",
+      /*methods:{
+        handleClick:function(){
+          this.$refs.hello.innerHTML = "wangshuaishaui"
+        }
+      }*/
+      data:{
+        total: 0
+      },
+      methods:{
+        handleChange:function(){
+          console.log(this.$refs.one.number)
+          console.log(this.$refs.two.number)
+          this.$data.total = this.$refs.one.number + this.$refs.two.number
+        }
+      }
+    })
+  </script>
+</html>

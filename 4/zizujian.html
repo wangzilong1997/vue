@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>子组件</title>
+  </head>
+  <body>
+    <div id="app">
+      <table>
+        <tbody>
+          <tr is="row">
+          </tr>
+          <tr is="row">
+          </tr>
+          <tr is="row">
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script type="text/javascript">
+    Vue.component("row",{
+      //必须是一个函数 每个组件独立数据
+      data:function(){
+        return {
+          content:"this is content"
+        }
+      },
+      template:'<tr><td>{{content}}</td></tr>'
+    })
+    var vm = new Vue({
+      el:"#app",
+    })
+  </script>
+</html>
