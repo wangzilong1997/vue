@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue中多个元素或组件的过渡</title>
+    <style>
+      .fade-enter, .fade-leave{
+        opacity: 0
+      }
+      .fade-enter-active, .feda-leave-active{
+        transition: opacity 3s
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <transition name="fade" mode="out-in">
+        <component v-bind:is="type"></component>
+      </transition>
+      <button v-on:click="handleClick">button</button>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <script type="text/javascript">
+    Vue.component("child",{
+      template:'<div>child</div>'
+    })
+    Vue.component("childone",{
+      template:'<div>childone</div>'
+    })
+    var vm = new Vue({
+      el:'#app',
+      data:{
+        type:'child'
+      },
+      methods:{
+        handleClick:function(){
+          this.type = this.type === 'child'?'childone':'child'
+        }
+      }
+    })
+  </script>
+</html>

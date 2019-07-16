@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue中的js动画与velocity.js</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- enter可以换成leave-->
+      <transition name="fade" v-on:before-enter="handleBeforeEnter" v-on:enter="handleEnter" v-on:after-enter="handleAfterEnter">
+        <div v-if="show">
+          hello world
+        </div>
+      </transition>
+      <button v-on:click="handleClick">button</button>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <!--<script src="https://julian.com/research/velocity/vmd.min.js"></script>-->
+  <script type="text/javascript">
+    var vm = new Vue({
+      el:'#app',
+      data:{
+        show:true
+      },
+      methods:{
+        handleClick:function(){
+          this.show = !this.show
+        },
+        handleBeforeEnter:function(el){
+          el.style.color = 'red'
+        },
+        handleEnter:function(el,done){
+          setTimeout(()=>{
+            el.style.color =  'green'
+          },2000)
+          setTimeout(()=>{
+            done()
+          },4000)
+        },
+        handleAfterEnter:function(el){
+          setTimeout(()=>{
+            el.style.color = "#000"
+          })
+        }
+      }
+    })
+  </script>
+</html>

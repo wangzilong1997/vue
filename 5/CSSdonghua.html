@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue中CSS动画原理</title>
+    <style media="screen">
+        .fade-enter{
+          opacity:0;
+        }
+        .fade-enter-active{
+          transition:opacity 3s;
+        }
+        .fade-leave-to{
+          opacity:0;
+        }
+        .fade-leave-active{
+          transition:opacity 3s;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 不用fade 可以默认换成v-->
+      <transition name="fade">
+        <div v-if="show">
+          hello world
+        </div>
+      </transition>
+      <button v-on:click="handleClick">button</button>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <script type="text/javascript">
+    var vm = new Vue({
+      el:'#app',
+      data:{
+        show:true
+      },
+      methods:{
+        handleClick:function(){
+          this.show = !this.show
+        }
+      }
+    })
+  </script>
+</html>
