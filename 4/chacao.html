@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Vue中的插槽（slot）</title>
+  </head>
+  <body>
+    <div id="app">
+      <!--<child content='<p>wang</p>'></child>-->
+      <!--<child><h1>wang</h1></child>-->
+      <child>
+        <div class="header" slot="header">header</div>
+        <div class="footer" slot="footer">footer</div>
+      </child>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <script type="text/javascript">
+    Vue.component('child',{
+      props:['content'],
+      /*template:`<div>
+                  <p>hello</p>
+                  <div v-html="this.content"></div>
+                </div>`*/
+      /*template:`<div>
+                    <p>hello</p>
+                    <slot>默认内容</slot>
+                </div>`*/
+      template:`<div>
+                  <slot name="header">deault</slot>
+                  <slot name="footer"></slot>
+                </div>`
+    })
+    var vm = new Vue({
+      el:'#app'
+    })
+  </script>
+</html>
