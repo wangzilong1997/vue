@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>velocity.js</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- enter可以换成leave-->
+      <transition name="fade" v-on:before-enter="handleBeforeEnter" v-on:enter="handleEnter" v-on:after-enter="handleAfterEnter">
+        <div v-if="show">
+          hello world
+        </div>
+      </transition>
+      <button v-on:click="handleClick">button</button>
+    </div>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+  <script src="./velocity.min.js">
+
+  </script>
+  <!--<script src="https://julian.com/research/velocity/vmd.min.js"></script>-->
+  <script type="text/javascript">
+    var vm = new Vue({
+      el:'#app',
+      data:{
+        show:true
+      },
+      methods:{
+        handleClick:function(){
+          this.show = !this.show
+        },
+        handleBeforeEnter:function(el){
+          el.style.opacity = 0
+        },
+        handleEnter:function(el,done){
+          Velocity(el,{opacity:1},{duration:1000,complete:done})
+        },
+        handleAfterEnter:function(el){
+          alert("动画结束")
+        }
+      }
+    })
+  </script>
+</html>
